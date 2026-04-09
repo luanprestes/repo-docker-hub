@@ -1,0 +1,26 @@
+# Compiled binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+server
+repo-docker-hub
+
+# Test binaries
+*.test
+
+# Coverage
+*.out
+coverage.html
+
+# Environment files — NEVER commit secrets
+.env
+.env.*
+*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
