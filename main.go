@@ -17,6 +17,7 @@ const (
 	writeTimeout      = 10 * time.Second
 	idleTimeout       = 120 * time.Second
 	shutdownTimeout   = 30 * time.Second
+	version           = "1.0.0"
 )
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
@@ -35,10 +36,17 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"status":"ok"}`))
 }
 
+func versionHandler(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(`{"version":"` + version + `"}`))
+}
+
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", helloHandler)
 	mux.HandleFunc("/health", healthHandler)
+	mux.HandleFunc("/version", versionHandler)
 
 	srv := &http.Server{
 		Addr:              addr,
