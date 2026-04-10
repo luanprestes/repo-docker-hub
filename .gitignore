@@ -24,3 +24,10 @@ coverage.html
 .vscode/
 *.swp
 *.swo
+
+# Go workspace
+go.work
+go.work.sum
+
+# Webhook service (not tracked)
+webhook/
