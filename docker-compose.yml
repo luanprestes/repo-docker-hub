@@ -1,0 +1,30 @@
+services:
+  api:
+    image: 02101995/repo-docker-hub:latest
+    container_name: repo-docker-hub-api
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  webhook:
+    build:
+      context: ./webhook
+    container_name: repo-docker-hub-webhook
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
+    volumes:
+      # Acesso ao socket do Docker para rodar comandos docker compose
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Monta o projeto para o deploy.sh ter acesso ao docker-compose.yml
+      - .:/app
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:9000/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
