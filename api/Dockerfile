@@ -1,5 +1,7 @@
 # ── Stage 1: Builder ────────────────────────────────────────────────────────
-FROM golang:1.24-alpine3.21 AS builder
+FROM --platform=$BUILDPLATFORM golang:1.24-alpine3.21 AS builder
+
+ARG TARGETARCH
 
 WORKDIR /app
 
@@ -9,7 +11,7 @@ RUN go mod download
 
 # Copy source and build a fully static binary
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETARCH go build \
     -ldflags="-w -s" \
     -o /app/server ./main.go
 

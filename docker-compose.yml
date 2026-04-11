@@ -1,6 +1,6 @@
 services:
   api:
-    image: luanprestes/repo-docker-hub:latest
+    image: 02101995/repo-docker-hub:latest
     container_name: repo-docker-hub-api
     ports:
       - "8080:8080"

@@ -25,9 +25,3 @@ coverage.html
 *.swp
 *.swo
 
-# Go workspace
-go.work
-go.work.sum
-
-# Webhook service (not tracked)
-webhook/
