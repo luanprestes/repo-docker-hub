@@ -8,10 +8,14 @@ import (
 	"time"
 )
 
-const (
-	addr       = ":9000"
-	deployScript = "/app/deploy.sh"
-)
+const addr = ":9000"
+
+func deployScriptPath() string {
+	if p := os.Getenv("DEPLOY_SCRIPT"); p != "" {
+		return p
+	}
+	return "./deploy.sh"
+}
 
 func webhookHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -26,7 +30,7 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 	go func() {
 		log.Println("webhook recebido — iniciando deploy...")
 
-		cmd := exec.Command("/bin/sh", deployScript)
+		cmd := exec.Command("/bin/sh", deployScriptPath())
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 
