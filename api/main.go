@@ -17,7 +17,7 @@ const (
 	writeTimeout      = 10 * time.Second
 	idleTimeout       = 120 * time.Second
 	shutdownTimeout   = 30 * time.Second
-	version           = "2.0.0"
+	version           = "3.0.0"
 )
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
