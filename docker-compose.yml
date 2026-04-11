@@ -21,8 +21,6 @@ services:
     volumes:
       # Acesso ao socket do Docker para rodar comandos docker compose
       - /var/run/docker.sock:/var/run/docker.sock
-      # Monta o deploy.sh dentro do container
-      - ./deploy.sh:/deploy.sh
       # Monta o projeto para o deploy.sh ter acesso ao docker-compose.yml
       - .:/app
     healthcheck:

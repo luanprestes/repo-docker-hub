@@ -10,7 +10,7 @@ import (
 
 const (
 	addr       = ":9000"
-	deployScript = "/deploy.sh"
+	deployScript = "/app/deploy.sh"
 )
 
 func webhookHandler(w http.ResponseWriter, r *http.Request) {
